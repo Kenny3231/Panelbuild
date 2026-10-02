@@ -235,6 +235,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
     <li><a href="#apercu">Aperçu</a></li>
     <li><a href="#comparaison">Avant / après</a></li>
     <li><a href="#panneaux">Choisir les panneaux</a></li>
+    <li><a href="#refs-64x32">Références 64×32</a></li>
     <li><a href="#configurations">Trois configurations</a></li>
     <li><a href="#materiel">Liste & budget</a></li>
     <li><a href="#cablage">Câblage</a></li>
@@ -344,6 +345,50 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
       </table>
     </div>
   </div>
+</section>
+
+<!-- REFERENCES 64x32 -->
+<section id="refs-64x32">
+  <div class="head">
+    <p class="eyebrow">Ton choix : panneaux 64×32</p>
+    <h2>Références 64×32</h2>
+    <p class="lede">Un panneau 64×32 est plus simple à piloter qu'un 64×64. Il est en scan 1/16, n'a pas besoin de la broche E et consomme deux fois moins. C'est aussi la taille par défaut de la librairie ESP32. En revanche, un seul P2.5 64×32 ne mesure que 16×8 cm : il en faut plusieurs pour dépasser ta matrice actuelle de 32×8 cm.</p>
+  </div>
+  <div class="scroll-x card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>Référence</th><th>Pas</th><th class="r">Taille (mm)</th><th class="r">Max. 5 V</th><th class="r">Prix</th><th>Où</th></tr></thead>
+      <tbody>
+        <tr class="pick"><td><b>Waveshare RGB-Matrix-P2.5-64x32</b><span class="where caption" style="display:block">SKU 23707 (standard) · 33839 (GOB, LED protégées par une résine)</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">2,5 A · 12 W</td><td class="r">17,99 $ HT (≈ 19 € TTC)<br>GOB 21,99 $</td><td><a href="https://www.waveshare.com/rgb-matrix-p2.5-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+        <tr><td><b>Muen P2.5 160×80 SMD2121 1/16 scan</b><span class="where caption" style="display:block">Générique AliExpress, plus de 700 ventes. Demande la puce au vendeur.</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">≈ 2,5 A</td><td class="r">9,15 $ (≈ 10 € TTC)</td><td><a href="https://www.aliexpress.com/item/3256803096913607.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
+        <tr><td><b>Adafruit 64x32 RGB LED Matrix 2.5 mm</b><span class="where caption" style="display:block">Produit n° 5036, très bien documenté</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">≈ 4 A</td><td class="r">44,95 $</td><td><a href="https://www.adafruit.com/product/5036" target="_blank" rel="noopener">adafruit.com</a></td></tr>
+        <tr><td><b>Waveshare RGB-Matrix-P3-64x32</b><span class="where caption" style="display:block">SKU 20117 (livré avec une façade acrylique fumée) · 33840 (GOB)</span></td><td>3 mm</td><td class="r">192×96</td><td class="r">2,5 A · 12 W</td><td class="r">22,99–25,99 $ HT</td><td><a href="https://www.waveshare.com/rgb-matrix-p3-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+        <tr><td><b>Waveshare RGB-Matrix-P4-64x32</b><span class="where caption" style="display:block">SKU 22101</span></td><td>4 mm</td><td class="r">256×128</td><td class="r">4 A · 20 W</td><td class="r">17,99 $ HT (≈ 19 € TTC)</td><td><a href="https://www.waveshare.com/rgb-matrix-p4-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+        <tr><td><b>EVERSHINE P4 indoor 256×128 1/16 scan</b><span class="where caption" style="display:block">Générique AliExpress, 1920 Hz, 81 ventes</span></td><td>4 mm</td><td class="r">256×128</td><td class="r">≈ 4 A</td><td class="r">9,97 $ (≈ 11 € TTC)</td><td><a href="https://www.aliexpress.com/item/3256805719339256.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
+        <tr><td>Waveshare P2.5 64×32 revendu sur Amazon.fr</td><td>2,5 mm</td><td class="r">160×80</td><td class="r">2,5 A</td><td class="r">46,56 €</td><td><a href="https://www.amazon.fr/dp/B0BRBGHFKQ" target="_blank" rel="noopener">Amazon.fr</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="two">
+    <div class="card scroll-x" style="padding:6px 8px">
+      <table>
+        <thead><tr><th>Assemblage</th><th class="r">Pixels</th><th class="r">Taille</th><th class="r">Courant max.</th></tr></thead>
+        <tbody>
+          <tr><td>2× P2.5 côte à côte</td><td class="r">128×32 · 4 096</td><td class="r">320×80 mm</td><td class="r">5 A</td></tr>
+          <tr class="pick"><td><b>4× P2.5 en 2×2</b></td><td class="r">128×64 · 8 192</td><td class="r">320×160 mm</td><td class="r">10 A</td></tr>
+          <tr><td>4× P3 en 2×2</td><td class="r">128×64 · 8 192</td><td class="r">384×192 mm</td><td class="r">10 A</td></tr>
+          <tr><td>2× P4 côte à côte</td><td class="r">128×32 · 4 096</td><td class="r">512×128 mm</td><td class="r">8 A</td></tr>
+          <tr><td>4× P4 en 2×2</td><td class="r">128×64 · 8 192</td><td class="r">512×256 mm</td><td class="r">16 A</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <h3>Ce qui change avec du 64×32</h3>
+      <p><strong>2× P2.5</strong> tient exactement dans la place de ta matrice actuelle (32×8 cm), avec 16 fois plus de pixels. <strong>4× P2.5 en 2×2</strong> double la hauteur et donne 32 fois plus de pixels pour environ 40 € de panneaux.</p>
+      <p>Câblage : seulement les lignes A, B, C et D. La broche 8 du connecteur reste en l'air ou sur GND, selon le panneau. Dans le code, garde <code>PANEL_H 32</code> et laisse <code>E</code> à -1.</p>
+      <p>Pour le cadre, chaque P2.5 64×32 tient largement sur le plateau de la P2S. Un cadre de 2×2 (336×176 mm) s'imprime en deux moitiés.</p>
+    </div>
+  </div>
+  <p class="note"><strong>Avant de payer :</strong> vérifie « indoor » et « 1/16 scan » dans l'annonce. Évite les modèles « outdoor 1/8 scan » (même en P4) : ils demandent une correspondance de pixels personnalisée. Commande tous les panneaux dans la même annonce, pour avoir le même lot et payer une seule fois les 3 € de douane.</p>
 </section>
 
 <!-- CONFIGURATIONS -->
