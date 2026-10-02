@@ -224,6 +224,8 @@ ol.steps li p { color: var(--muted); font-size: .92rem; }
 .note { padding: 12px 14px; border-radius: 8px; background: var(--accent-soft); font-size: .9rem; max-width: 76ch; }
 .sources { columns: 2 320px; column-gap: 32px; font-size: .84rem; color: var(--muted); padding-left: 18px; margin: 0; }
 .sources li { break-inside: avoid; margin-bottom: 6px; overflow-wrap: anywhere; }
+details.card summary { cursor: pointer; font-weight: 600; }
+details.card summary::marker { color: var(--accent); }
 footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); padding-top: 18px; }
 </style>
 </head>
@@ -235,7 +237,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <ol>
     <li><a href="#apercu">Aperçu</a></li>
     <li><a href="#comparaison">Avant / après</a></li>
-    <li><a href="#panneaux">Panneaux 64×32</a></li>
+    <li><a href="#panneaux">Le panneau</a></li>
     <li><a href="#configurations">Trois configurations</a></li>
     <li><a href="#materiel">Liste & budget</a></li>
     <li><a href="#cablage">Câblage</a></li>
@@ -253,11 +255,11 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
 <!-- HERO -->
 <section id="apercu" class="hero">
   <div class="hero-copy">
-    <p class="kicker">ESP32-S3-N16R8 · 4 panneaux HUB75 64×32 · cadre imprimé sur P2S</p>
-    <h1>De 256 à <span>8 192</span> pixels</h1>
-    <p class="lede">Ton panneau actuel, c'est 8×32 LED WS2812 espacées de 10 mm. Le projet passe à quatre panneaux HUB75 de 64×32 au pas de 2,5 mm, assemblés en 2×2 : un écran de 32×16 cm et 128×64 pixels. Ça fait 32 fois plus de pixels, deux fois plus haut, et 16 fois plus de densité. Un des ESP32-S3 que tu as déjà suffit à le piloter.</p>
+    <p class="kicker">ESP32-S3-N16R8 · 1 panneau HUB75 P2.5 320×160 mm · cadre imprimé sur P2S</p>
+    <h1>De 256 à <span>8 192</span> pixels</h1>
+    <p class="lede">Ton panneau actuel, c'est 8×32 LED WS2812 espacées de 10 mm. Le projet passe à un seul panneau HUB75 P2.5 de 128×64 pixels, qui mesure 320×160 mm. Ça fait 32 fois plus de pixels, deux fois plus haut, 16 fois plus de densité, et aucun raccord au milieu de l'image. Un des ESP32-S3 que tu as déjà suffit à le piloter, et un deuxième panneau pourra s'ajouter plus tard.</p>
     <div class="stats">
-      <div class="stat"><b>×32</b><span>pixels (256 → 8 192)</span></div>
+      <div class="stat"><b>×32</b><span>pixels (256 → 8 192)</span></div>
       <div class="stat"><b>2,5 mm</b><span>entre deux LED (avant 10 mm)</span></div>
       <div class="stat"><b id="heroTotal">≈ 150 €</b><span>budget config. recommandée</span></div>
     </div>
@@ -266,7 +268,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="panel-frame">
     <canvas id="heroCanvas" class="wide" aria-label="Simulation animée d'un écran 128×64 LED" role="img"></canvas>
     <div class="fx" id="heroFx" role="group" aria-label="Effet affiché"></div>
-    <p class="caption">Simulation d'un 128×64 (4 panneaux 64×32). Les effets sont calculés pixel par pixel, comme sur l'ESP32.</p>
+    <p class="caption">Simulation du panneau 128×64. Les effets sont calculés pixel par pixel, comme sur l'ESP32.</p>
   </div>
 </section>
 
@@ -275,7 +277,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="head">
     <p class="eyebrow">Même largeur, 32 cm</p>
     <h2>Avant / après, à l'échelle</h2>
-    <p class="lede">Les deux panneaux ci-dessous sont dessinés avec la même échelle. Ta matrice 8×32 fait 320×80 mm. Le nouvel écran fait 320×160 mm : même largeur, deux fois plus haut, et quatre fois plus de LED par ligne.</p>
+    <p class="lede">Les deux panneaux ci-dessous sont dessinés avec la même échelle. Ta matrice 8×32 fait 320×80 mm. Le nouveau panneau fait 320×160 mm : même largeur, deux fois plus haut, et quatre fois plus de LED par ligne.</p>
   </div>
   <div class="card compare">
     <div class="fx" id="cmpFx" role="group" aria-label="Effet de la comparaison"></div>
@@ -284,7 +286,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
       <canvas id="cmpOld" role="img" aria-label="Matrice 8 par 32 à l'échelle"></canvas>
     </div>
     <div class="compare-row">
-      <div class="lbl"><b>Nouveau · 4× HUB75 P2.5 64×32</b><span>pas 2,5 mm · 8 192 LED · 320×160 mm</span></div>
+      <div class="lbl"><b>Nouveau · 1× HUB75 P2.5 128×64</b><span>pas 2,5 mm · 8 192 LED · 320×160 mm</span></div>
       <canvas id="cmpNew" role="img" aria-label="Écran 128 par 64 à l'échelle"></canvas>
       <div class="ruler"><span>0</span><span style="left:25%">80</span><span style="left:50%">160</span><span style="left:75%">240</span><span style="left:100%">320 mm</span></div>
     </div>
@@ -300,7 +302,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
     <div class="prose">
       <h3>Pourquoi passer au HUB75 plutôt qu'à plus de WS2812</h3>
       <p>Les WS2812 existent au mieux en pas de 4 à 5 mm, et chaque LED coûte une trame de données : 8 192 WS2812 sur une seule sortie, c'est environ 4 images par seconde. Un panneau <strong>HUB75</strong> est une grille de LED RGB multiplexée, conçue pour les écrans géants. L'ESP32-S3 l'alimente en parallèle par DMA (16 fils), ce qui donne plus de 100 rafraîchissements par seconde sur 128×64.</p>
-      <p>Autre avantage : le prix. Un panneau 64×32 P2.5 coûte environ 10 € pour 2 048 LED, soit un demi-centime la LED. Il faut compter 15 à 20 centimes pour une WS2812.</p>
+      <p>Autre avantage : le prix. Un panneau P2.5 128×64 coûte environ 18 € pour 8 192 LED, soit 0,2 centime la LED. Il faut compter 15 à 20 centimes pour une WS2812.</p>
     </div>
   </div>
 </section>
@@ -308,29 +310,42 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
 <!-- PANNEAUX -->
 <section id="panneaux">
   <div class="head">
-    <p class="eyebrow">P = pitch, l'écart entre LED en mm</p>
-    <h2>Panneaux 64×32 : références</h2>
-    <p class="lede">Un panneau 64×32 est plus simple à piloter qu'un 64×64. Il est en scan 1/16, n'a pas besoin de la broche E et consomme deux fois moins. C'est aussi la taille par défaut de la librairie ESP32. Un seul P2.5 ne mesure que 16×8 cm : on en assemble donc quatre.</p>
+    <p class="eyebrow">Hauteur minimum : 160 mm</p>
+    <h2>Le panneau : P2.5 128×64, 320×160 mm</h2>
+    <p class="lede">Un panneau P2.5 128×64 fait exactement la même taille et le même nombre de pixels que quatre panneaux 64×32 en 2×2, mais d'un seul tenant. Il coûte moins cher, n'a aucun raccord visible, et ne demande qu'une nappe et un câble d'alimentation.</p>
   </div>
   <div class="scroll-x card" style="padding:6px 8px">
     <table>
-      <thead><tr><th>Référence</th><th>Pas</th><th class="r">Taille (mm)</th><th class="r">Max. 5 V</th><th class="r">Prix</th><th>Où</th></tr></thead>
+      <thead><tr><th></th><th>1× P2.5 128×64 (320×160)</th><th>4× P2.5 64×32 en 2×2</th></tr></thead>
       <tbody>
-        <tr class="pick"><td><b>Muen P2.5 160×80 SMD2121 1/16 scan</b><span class="where caption" style="display:block">Générique, plus de 700 ventes. Demande la puce au vendeur.</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">≈ 2,5 A</td><td class="r">9,15 $ (≈ 10 € TTC)</td><td><a href="https://www.aliexpress.com/item/3256803096913607.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
-        <tr class="pick"><td><b>Waveshare RGB-Matrix-P2.5-64x32</b><span class="where caption" style="display:block">SKU 23707 (standard) · 33839 (GOB, LED protégées par une résine)</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">2,5 A · 12 W</td><td class="r">17,99 $ HT (≈ 19 € TTC)<br>GOB 21,99 $</td><td><a href="https://www.waveshare.com/rgb-matrix-p2.5-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
-        <tr><td><b>Adafruit 64x32 RGB LED Matrix 2.5 mm</b><span class="where caption" style="display:block">Produit n° 5036, très bien documenté</span></td><td>2,5 mm</td><td class="r">160×80</td><td class="r">≈ 4 A</td><td class="r">44,95 $</td><td><a href="https://www.adafruit.com/product/5036" target="_blank" rel="noopener">adafruit.com</a></td></tr>
-        <tr><td><b>Waveshare RGB-Matrix-P3-64x32</b><span class="where caption" style="display:block">SKU 20117 (livré avec une façade acrylique fumée) · 33840 (GOB)</span></td><td>3 mm</td><td class="r">192×96</td><td class="r">2,5 A · 12 W</td><td class="r">22,99–25,99 $ HT</td><td><a href="https://www.waveshare.com/rgb-matrix-p3-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
-        <tr><td><b>Waveshare RGB-Matrix-P4-64x32</b><span class="where caption" style="display:block">SKU 22101</span></td><td>4 mm</td><td class="r">256×128</td><td class="r">4 A · 20 W</td><td class="r">17,99 $ HT (≈ 19 € TTC)</td><td><a href="https://www.waveshare.com/rgb-matrix-p4-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
-        <tr><td><b>EVERSHINE P4 indoor 256×128 1/16 scan</b><span class="where caption" style="display:block">Générique, 1920 Hz, 81 ventes</span></td><td>4 mm</td><td class="r">256×128</td><td class="r">≈ 4 A</td><td class="r">9,97 $ (≈ 11 € TTC)</td><td><a href="https://www.aliexpress.com/item/3256805719339256.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
-        <tr><td>Waveshare P2.5 revendu sur Amazon.fr</td><td>2,5 mm</td><td class="r">160×80</td><td class="r">2,5 A</td><td class="r">46,56 €</td><td><a href="https://www.amazon.fr/dp/B0BRBGHFKQ" target="_blank" rel="noopener">Amazon.fr</a></td></tr>
+        <tr><td>Pixels / taille</td><td>128×64 sur 320×160 mm</td><td>128×64 sur 320×160 mm</td></tr>
+        <tr><td>Prix des panneaux</td><td><b>≈ 18–21 €</b> (AliExpress, douane comprise)</td><td>≈ 43 €</td></tr>
+        <tr><td>Raccords visibles</td><td><span class="pill good">aucun</span></td><td><span class="pill warn">croix au milieu</span></td></tr>
+        <tr><td>Câbles</td><td><b>1 nappe, 1 câble d'alim</b></td><td>4 nappes, 4 câbles d'alim</td></tr>
+        <tr><td>Courant max.</td><td><b>≈ 4–5 A</b> (20–24 W)</td><td>≈ 10 A</td></tr>
+        <tr><td>Scan / broche E</td><td>1/32, broche E nécessaire</td><td>1/16, pas de broche E</td></tr>
+        <tr><td>Rafraîchissement</td><td>identique (même quantité de données par ligne)</td><td>identique</td></tr>
+        <tr><td>En cas de panne</td><td>on remplace tout le panneau (≈ 18 €)</td><td>on remplace un petit panneau (≈ 10 €)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="scroll-x card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>Référence</th><th>Scan</th><th class="r">Prix</th><th>Où</th></tr></thead>
+      <tbody>
+        <tr class="pick"><td><b>P2.5 Indoor · 320mm×160mm · 128×64 · SMD2121 · 32Scan</b><span class="where caption" style="display:block">Plus de 500 ventes. Demande la puce au vendeur.</span></td><td>1/32</td><td class="r">17,11 $ (≈ 18 € TTC + 3 € de douane)</td><td><a href="https://www.aliexpress.com/item/3256806426238643.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
+        <tr><td><b>Même modèle, autre vendeur</b><span class="where caption" style="display:block">115 ventes</span></td><td>1/32</td><td class="r">13,63 $ (≈ 15 € TTC + 3 €)</td><td><a href="https://www.aliexpress.com/item/3256808933776861.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
+        <tr class="pick"><td><b>HCLZOE P2.5 128×64 320×160 mm, lot de 2</b><span class="where caption" style="display:block">Pas de douane, livraison rapide, un panneau de rechange ou pour l'évolution</span></td><td>1/32</td><td class="r">45,77 € les 2</td><td><a href="https://www.amazon.fr/HCLZOE-DAffichage-Polychrome-DInt%C3%A9rieur-320x160mm/dp/B0DS2J3ZRL" target="_blank" rel="noopener">Amazon.fr</a></td></tr>
+        <tr><td>Annonces « 128×64 16 Scan »</td><td>1/16</td><td class="r">≈ 15 $</td><td><span class="pill bad">à éviter</span> correspondance de pixels compliquée</td></tr>
+        <tr><td>Annonces « outdoor 6000 nits » ou « 3840 Hz »</td><td>–</td><td class="r">≈ 35–57 $</td><td><span class="pill bad">à éviter</span> souvent une puce S-PWM</td></tr>
       </tbody>
     </table>
   </div>
   <div class="two">
     <div class="prose">
       <h3>La puce du panneau compte plus que le pas</h3>
-      <p>Le pilote ESP32 (librairie <code>ESP32-HUB75-MatrixPanel-DMA</code>, utilisée aussi par WLED et ESPHome) ne fonctionne qu'avec des puces à registre à décalage simple. Les panneaux 64×32 en scan 1/16 en ont presque toujours une, mais les annonces AliExpress ne la donnent pas.</p>
-      <p>Sur l'annonce, cherche <strong>« indoor, 1/16 scan, HUB75 »</strong>. Évite les « outdoor 1/8 scan », même en P4. Commande les quatre panneaux dans la même annonce : même lot, et 3 € de douane payés une seule fois.</p>
+      <p>Le pilote ESP32 (librairie <code>ESP32-HUB75-MatrixPanel-DMA</code>, utilisée aussi par WLED et ESPHome) ne fonctionne qu'avec des puces à registre à décalage simple. Les 128×64 sont plus souvent livrés avec des puces S-PWM incompatibles qu'un petit 64×32, par exemple la FM6363 sur certains P2. Les annonces ne donnent jamais la puce : demande-la avant de payer.</p>
+      <p>Sur l'annonce, cherche <strong>« indoor, 32 Scan, HUB75 (E), SMD2121 »</strong>.</p>
     </div>
     <div class="card scroll-x" style="padding:6px 8px">
       <table>
@@ -340,19 +355,35 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
           <tr><td class="mono">FM6126A / ICN2038S / FM6124</td><td><span class="pill good">oui</span> avec <code>driver = FM6126A</code></td></tr>
           <tr><td class="mono">DP3246 + SM5368, SM16208SF</td><td><span class="pill good">oui</span> réglage dédié</td></tr>
           <tr><td class="mono">ICN2053, ICN2153, FM6353, FM6363, MBI5051–5153, MBI6024</td><td><span class="pill bad">non</span></td></tr>
-          <tr><td class="mono">Scan 1/8 ou 1/4 (« outdoor »)</td><td><span class="pill warn">possible, pénible</span></td></tr>
+          <tr><td class="mono">Scan 1/16 sur 64 lignes, 1/8 (« outdoor »)</td><td><span class="pill warn">possible, pénible</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
+  <details class="card">
+    <summary>Alternative : panneaux 64×32 (Waveshare, Adafruit…)</summary>
+    <div class="scroll-x" style="margin-top:12px">
+      <table>
+        <thead><tr><th>Référence</th><th>Pas</th><th class="r">Taille (mm)</th><th class="r">Prix</th><th>Où</th></tr></thead>
+        <tbody>
+          <tr><td>Muen P2.5 160×80 1/16 scan</td><td>2,5 mm</td><td class="r">160×80</td><td class="r">9,15 $</td><td><a href="https://www.aliexpress.com/item/3256803096913607.html" target="_blank" rel="noopener">AliExpress</a></td></tr>
+          <tr><td>Waveshare RGB-Matrix-P2.5-64x32 (SKU 23707 / GOB 33839)</td><td>2,5 mm</td><td class="r">160×80</td><td class="r">17,99 $ HT</td><td><a href="https://www.waveshare.com/rgb-matrix-p2.5-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+          <tr><td>Adafruit 64x32 2.5 mm (n° 5036)</td><td>2,5 mm</td><td class="r">160×80</td><td class="r">44,95 $</td><td><a href="https://www.adafruit.com/product/5036" target="_blank" rel="noopener">adafruit.com</a></td></tr>
+          <tr><td>Waveshare RGB-Matrix-P3-64x32 (SKU 20117)</td><td>3 mm</td><td class="r">192×96</td><td class="r">22,99 $ HT</td><td><a href="https://www.waveshare.com/rgb-matrix-p3-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+          <tr><td>Waveshare RGB-Matrix-P4-64x32 (SKU 22101)</td><td>4 mm</td><td class="r">256×128</td><td class="r">17,99 $ HT</td><td><a href="https://www.waveshare.com/rgb-matrix-p4-64x32.htm" target="_blank" rel="noopener">waveshare.com</a></td></tr>
+        </tbody>
+      </table>
+      <p class="caption" style="margin-top:8px">Il en faut quatre en 2×2 pour atteindre 160 mm de haut. Un P5 64×32 fait 320×160 mm, mais avec seulement 2 048 pixels de 5 mm : il ne vaut pas le coup.</p>
+    </div>
+  </details>
 </section>
 
 <!-- CONFIGURATIONS -->
 <section id="configurations">
   <div class="head">
-    <p class="eyebrow">Toutes en panneaux 64×32</p>
+    <p class="eyebrow">Toutes à 160 mm de haut ou plus</p>
     <h2>Trois configurations</h2>
-    <p class="lede">Les trois versions utilisent des panneaux 64×32. Elles diffèrent par le nombre de panneaux et le pas. Les prix sont TTC et livrés : panneaux, alimentation, câblage, filament, diffuseur et fond. L'ESP32 n'est pas compté, puisque tu l'as déjà.</p>
+    <p class="lede">Les trois versions utilisent le panneau P2.5 128×64 de 320×160 mm. La A en utilise un seul, la B et la C en assemblent deux, en carré ou en bandeau. Les prix sont TTC et livrés : panneaux, alimentation, câblage, filament, diffuseur et fond. L'ESP32 n'est pas compté, puisque tu l'as déjà.</p>
   </div>
   <div class="configs" id="cfgCards"></div>
   <div class="two">
@@ -379,7 +410,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   </div>
   <div class="toolbar">
     <div class="seg" id="cfgSeg" role="group" aria-label="Configuration"></div>
-    <label class="caption" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="waveshare"> Panneaux Waveshare (marque fiable, plus cher)</label>
+    <label class="caption" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="waveshare"> Panneaux Amazon.fr (lot de 2, sans douane, livraison rapide)</label>
   </div>
   <div class="card scroll-x" style="padding:6px 8px">
     <table class="bom" id="bom">
@@ -397,24 +428,24 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
 <!-- CABLAGE -->
 <section id="cablage">
   <div class="head">
-    <p class="eyebrow">Chaînage en serpentin 2×2</p>
+    <p class="eyebrow">Un panneau, une nappe, un câble</p>
     <h2>Câblage</h2>
-    <p class="lede">Les données entrent dans le premier panneau, ressortent par sa prise OUT et passent au suivant par une nappe. La rangée du bas est montée tête en bas (180°) pour que les nappes restent courtes. Le courant, lui, ne passe jamais d'un panneau à l'autre : chaque panneau a son propre câble vers l'alimentation.</p>
+    <p class="lede">Avec un seul panneau, le câblage tient en trois liaisons : une nappe de données de l'ESP32 vers la prise IN, un câble 5 V de l'alimentation vers le panneau, et une masse commune avec l'ESP32. La prise OUT servira le jour où tu ajouteras un deuxième panneau.</p>
   </div>
   <figure class="card scroll-x">
-    <svg class="diagram" viewBox="0 0 960 500" role="img" aria-labelledby="wiringTitle" style="min-width:640px">
-      <title id="wiringTitle">Schéma de câblage : ESP32-S3 vers quatre panneaux 64×32 en serpentin, alimentation en étoile</title>
+    <svg class="diagram" viewBox="0 0 960 470" role="img" aria-labelledby="wiringTitle" style="min-width:640px">
+      <title id="wiringTitle">Schéma de câblage : ESP32-S3 vers un panneau P2.5 128×64, alimentation 5 V</title>
       <defs>
         <pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="var(--surface)"/><circle cx="4.5" cy="4.5" r="1.4" class="dotc"/></pattern>
         <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="acc"/></marker>
       </defs>
-      <text x="360" y="26" class="mut">VUE DE DOS (côté câbles) · flèches = sens des données</text>
+      <text x="380" y="26" class="mut">VUE DE DOS (côté câbles) · flèche = sens des données</text>
 
       <rect class="box" x="20" y="60" width="150" height="200" rx="8"/>
       <rect class="box2" x="45" y="78" width="100" height="44" rx="4"/>
       <text x="95" y="105" text-anchor="middle" class="mono">ESP32-S3</text>
       <text x="95" y="150" text-anchor="middle">N16R8</text>
-      <text x="95" y="170" text-anchor="middle" class="mut">13 GPIO → HUB75</text>
+      <text x="95" y="170" text-anchor="middle" class="mut">14 GPIO → HUB75</text>
       <text x="95" y="188" text-anchor="middle" class="mut">GPIO 26–37 interdits</text>
       <text x="95" y="206" text-anchor="middle" class="mut">(flash + PSRAM)</text>
       <g class="thin"><line x1="28" y1="225" x2="162" y2="225"/></g>
@@ -425,52 +456,38 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
       <text x="260" y="174" text-anchor="middle" class="mut">3,3 V → 5 V</text>
       <text x="260" y="190" text-anchor="middle" class="mut">optionnel</text>
 
-      <rect class="pnl" x="360" y="40" width="270" height="135" rx="4"/>
-      <rect class="pnl" x="650" y="40" width="270" height="135" rx="4"/>
-      <rect class="pnl" x="650" y="195" width="270" height="135" rx="4"/>
-      <rect class="pnl" x="360" y="195" width="270" height="135" rx="4"/>
-      <rect class="box" x="455" y="52" width="80" height="26" rx="5"/><text x="495" y="70" text-anchor="middle">P1 · 64×32</text>
-      <rect class="box" x="745" y="52" width="80" height="26" rx="5"/><text x="785" y="70" text-anchor="middle">P2 · 64×32</text>
-      <rect class="box" x="732" y="292" width="106" height="26" rx="5"/><text x="785" y="310" text-anchor="middle">P3 · tourné 180°</text>
-      <rect class="box" x="442" y="292" width="106" height="26" rx="5"/><text x="495" y="310" text-anchor="middle">P4 · tourné 180°</text>
-
-      <rect class="conn" x="372" y="96" width="34" height="22" rx="3"/><text x="389" y="111" text-anchor="middle" class="mono">IN</text>
-      <rect class="conn" x="584" y="96" width="34" height="22" rx="3"/><text x="601" y="111" text-anchor="middle" class="mono">OUT</text>
-      <rect class="conn" x="662" y="96" width="34" height="22" rx="3"/><text x="679" y="111" text-anchor="middle" class="mono">IN</text>
-      <rect class="conn" x="874" y="96" width="34" height="22" rx="3"/><text x="891" y="111" text-anchor="middle" class="mono">OUT</text>
-      <rect class="conn" x="874" y="251" width="34" height="22" rx="3"/><text x="891" y="266" text-anchor="middle" class="mono">IN</text>
-      <rect class="conn" x="662" y="251" width="34" height="22" rx="3"/><text x="679" y="266" text-anchor="middle" class="mono">OUT</text>
-      <rect class="conn" x="584" y="251" width="34" height="22" rx="3"/><text x="601" y="266" text-anchor="middle" class="mono">IN</text>
-      <rect class="conn" x="372" y="251" width="34" height="22" rx="3"/><text x="389" y="266" text-anchor="middle" class="mono">OUT</text>
+      <rect class="pnl" x="380" y="40" width="540" height="270" rx="4"/>
+      <rect class="box" x="565" y="56" width="170" height="28" rx="5"/><text x="650" y="75" text-anchor="middle">P2.5 128×64 · 320×160 mm</text>
+      <rect class="conn" x="396" y="154" width="34" height="22" rx="3"/><text x="413" y="169" text-anchor="middle" class="mono">IN</text>
+      <rect class="conn" x="870" y="154" width="34" height="22" rx="3" stroke-dasharray="3 3"/><text x="887" y="169" text-anchor="middle" class="mono">OUT</text>
+      <text x="880" y="198" text-anchor="middle" class="mut">vers un</text><text x="872" y="213" text-anchor="middle" class="mut">2e panneau</text>
+      <rect class="box2" x="610" y="250" width="80" height="26" rx="4"/><text x="650" y="268" text-anchor="middle" class="mono">5 V · GND</text>
 
       <path class="data" d="M170 165 H200" marker-end="url(#arr)"/>
-      <path class="data" d="M320 165 H340 Q352 165 352 153 V119 Q352 107 364 107 H370" marker-end="url(#arr)"/>
-      <path class="data" d="M618 107 H660" marker-end="url(#arr)"/>
-      <path class="data" d="M908 107 H932 Q942 107 942 119 V250 Q942 262 932 262 H910" marker-end="url(#arr)"/>
-      <path class="data" d="M662 262 H620" marker-end="url(#arr)"/>
-      <text x="200" y="118" class="mut">nappe ≤ 30 cm</text>
+      <path class="data" d="M320 165 H394" marker-end="url(#arr)"/>
+      <text x="328" y="152" class="mut">nappe</text>
 
-      <rect class="box" x="20" y="352" width="190" height="96" rx="8"/>
-      <text x="115" y="380" text-anchor="middle" class="mono">ALIM 5 V</text>
-      <text x="115" y="400" text-anchor="middle">Mean Well LRS-100-5</text>
-      <text x="115" y="419" text-anchor="middle" class="mut">18 A · 90 W</text>
-      <text x="115" y="436" text-anchor="middle" class="mut">terre du 230 V raccordée</text>
-      <path class="pwr" d="M210 400 H236"/>
-      <rect x="236" y="392" width="30" height="16" rx="3" class="box2"/><text x="251" y="386" text-anchor="middle" class="mut">fusible 15 A</text>
-      <path class="pwr" d="M266 400 H292"/>
-      <rect x="292" y="384" width="44" height="32" rx="4" class="box2"/><text x="314" y="404" text-anchor="middle" class="mono">Wago</text>
-      <path class="pwr" d="M336 408 H350 V430 H495 V330"/>
-      <path class="pwr" d="M350 430 H785 V330"/>
-      <path class="pwr" d="M336 392 H346 V195 Q346 185 356 185 H495 V175"/>
-      <path class="pwr" d="M785 430 H950 V195 Q950 185 940 185 H785 V175"/>
-      <path class="pwr" d="M314 384 V300 Q314 290 304 290 H120 V260" stroke-width="1.4"/>
-      <g class="pwrf"><circle cx="495" cy="175" r="4"/><circle cx="785" cy="175" r="4"/><circle cx="495" cy="330" r="4"/><circle cx="785" cy="330" r="4"/></g>
-      <text x="505" y="362" class="mut">1 paire 18 AWG + 1000 µF par panneau</text>
+      <rect class="box" x="20" y="330" width="190" height="96" rx="8"/>
+      <text x="115" y="358" text-anchor="middle" class="mono">ALIM 5 V</text>
+      <text x="115" y="378" text-anchor="middle">Mean Well LRS-50-5</text>
+      <text x="115" y="397" text-anchor="middle" class="mut">10 A · 50 W</text>
+      <text x="115" y="414" text-anchor="middle" class="mut">terre du 230 V raccordée</text>
+      <path class="pwr" d="M210 378 H236"/>
+      <rect x="236" y="370" width="30" height="16" rx="3" class="box2"/><text x="251" y="364" text-anchor="middle" class="mut">fusible 10 A</text>
+      <path class="pwr" d="M266 378 H292"/>
+      <rect x="292" y="362" width="44" height="32" rx="4" class="box2"/><text x="314" y="382" text-anchor="middle" class="mono">Wago</text>
+      <path class="pwr" d="M336 378 H650 V276"/>
+      <path class="pwr" d="M314 362 V300 Q314 290 304 290 H120 V260" stroke-width="1.4"/>
+      <g class="pwrf"><circle cx="650" cy="276" r="4"/></g>
+      <rect x="664" y="330" width="40" height="22" rx="4" class="box2"/><text x="684" y="345" text-anchor="middle" class="mono">µF</text>
+      <path class="thin" d="M650 341 H664"/>
+      <text x="712" y="346" class="mut">1000 µF aux bornes du panneau</text>
+      <text x="350" y="370" class="mut">câble 4 broches fourni (18 AWG)</text>
       <text x="128" y="282" class="mut">5 V + GND commun</text>
-      <text x="240" y="470" class="mut">Orange : nappes de données 16 broches</text>
-      <text x="240" y="486" class="mut">Rouge : +5 V / GND, câble 4 broches fourni avec chaque panneau</text>
+      <text x="240" y="446" class="mut">Orange : nappe de données 16 broches</text>
+      <text x="240" y="462" class="mut">Rouge : +5 V / GND</text>
     </svg>
-    <figcaption>Le schéma suit le type de chaînage <code>CHAIN_TOP_RIGHT_DOWN</code> utilisé par WLED et la librairie. Vu de face, P1 est en haut à droite. Les prises IN/OUT sont repérées par des flèches imprimées au dos de chaque panneau.</figcaption>
+    <figcaption>Les prises IN et OUT sont repérées par des flèches imprimées au dos du panneau. Pour un deuxième panneau plus tard : nappe de OUT vers IN du suivant, et son propre câble d'alimentation depuis le Wago, jamais à travers le premier.</figcaption>
   </figure>
 
   <div class="two wide-left">
@@ -484,8 +501,8 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
       <h3>Brochage</h3>
       <p>La colonne <strong>WLED</strong> correspond au firmware officiel <code>ESP32-S3_16MB_opi_HUB75.bin</code>, qui se flashe sans rien compiler. Ce firmware prévoit aussi un micro INMP441 sur GPIO 10, 11 et 12, et une sortie WS2812 sur GPIO 14 pour réutiliser ton ancienne matrice.</p>
       <p>La colonne <strong>Arduino</strong> correspond au brochage par défaut de la librairie. Les deux évitent les GPIO 26 à 37, que la flash et la PSRAM octale du N16R8 occupent.</p>
-      <div class="hub" aria-label="Connecteur HUB75 vu de face" id="hub"></div>
-      <p class="caption">Connecteur HUB75, détrompeur en haut. Sur un 64×32 en scan 1/16, la broche 8 (E) ne sert pas : elle est souvent reliée à la masse sur le panneau.</p>
+      <div class="hub" aria-label="Connecteur HUB75E vu de face" id="hub"></div>
+      <p class="caption">Connecteur HUB75E, détrompeur en haut. La broche E (8) est indispensable sur un panneau de 64 lignes en scan 1/32 : sans elle, seule une moitié de l'image s'affiche, en double.</p>
     </div>
   </div>
   <p class="note"><strong>Faut-il un convertisseur de niveau ?</strong> Le plus souvent non : les panneaux acceptent les signaux 3,3 V de l'ESP32. Si tu vois des pixels fantômes ou des scintillements avec des nappes longues, ajoute deux <code>74AHCT245</code> (ou 74HCT245, le « T » est obligatoire) alimentés en 5 V, ou une carte support Seengreat (E) V2 à environ 12 €.</p>
@@ -496,20 +513,20 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="head">
     <p class="eyebrow">5 V, beaucoup d'ampères</p>
     <h2>Alimentation</h2>
-    <p class="lede">Un panneau 64×32 P2.5 tire jusqu'à 2,5 A en blanc plein (fiche Waveshare). Quatre panneaux font donc 10 A au maximum, plus 0,3 A pour l'ESP32. En pratique, des animations colorées consomment le tiers de ce maximum. Prends une alimentation qui couvre le pire cas avec environ 50 % de marge : elle chauffera moins et durera plus longtemps.</p>
+    <p class="lede">Un panneau P2.5 128×64 consomme 20 à 24 W en blanc plein d'après les fiches techniques, soit 4 à 5 A sous 5 V, plus 0,3 A pour l'ESP32. Deux panneaux font donc environ 10 A. En pratique, des animations colorées consomment le tiers de ce maximum. Prends une alimentation qui couvre le pire cas avec environ 50 % de marge : elle chauffera moins et durera plus longtemps.</p>
   </div>
 
   <div class="scroll-x card" style="padding:6px 8px">
     <table>
       <thead><tr><th>Alimentation conseillée</th><th class="r">Sortie</th><th>Format</th><th class="r">Prix</th><th>Pour</th></tr></thead>
       <tbody>
-        <tr><td><b>Mean Well GST60A05-P1J</b><span class="where caption" style="display:block">Bloc secteur fermé, comme un chargeur d'ordinateur. Jack 5,5×2,1 mm. Aucun fil 230 V à toucher.</span></td><td class="r">5 V · 6 A · 30 W</td><td>bloc externe</td><td class="r">18,90 €</td><td><span class="pill good">config. A</span></td></tr>
-        <tr><td><b>Mean Well LRS-50-5</b><span class="where caption" style="display:block">99×82×30 mm, bornier à vis, sans ventilateur</span></td><td class="r">5 V · 10 A · 50 W</td><td>boîtier à bornier</td><td class="r">13,95 €</td><td><span class="pill warn">B si luminosité ≤ 80 %</span></td></tr>
-        <tr class="pick"><td><b>Mean Well LRS-100-5</b><span class="where caption" style="display:block">129×97×30 mm, 3 bornes + et 3 bornes −, sans ventilateur</span></td><td class="r">5 V · 18 A · 90 W</td><td>boîtier à bornier</td><td class="r">≈ 14–18 €</td><td><span class="pill good">config. B · recommandé</span></td></tr>
-        <tr><td><b>Mean Well LRS-150F-5</b><span class="where caption" style="display:block">159×97×30 mm, en stock chez Reichelt France</span></td><td class="r">5 V · 22 A · 110 W</td><td>boîtier à bornier</td><td class="r">24,25 €</td><td><span class="pill good">config. C</span> ou B très large</td></tr>
-        <tr><td><b>Mean Well LRS-200-5</b><span class="where caption" style="display:block">215×115×30 mm, pour agrandir plus tard (8 panneaux)</span></td><td class="r">5 V · 40 A · 200 W</td><td>boîtier à bornier</td><td class="r">≈ 41–44 €</td><td><span class="pill acc">évolution</span></td></tr>
+        <tr><td><b>Mean Well GST60A05-P1J</b><span class="where caption" style="display:block">Bloc secteur fermé, comme un chargeur d'ordinateur. Jack 5,5×2,1 mm. Aucun fil 230 V à toucher.</span></td><td class="r">5 V · 6 A · 30 W</td><td>bloc externe</td><td class="r">18,90 €</td><td><span class="pill warn">A, marge juste</span> aucun 230 V</td></tr>
+        <tr class="pick"><td><b>Mean Well LRS-50-5</b><span class="where caption" style="display:block">99×82×30 mm, bornier à vis, sans ventilateur</span></td><td class="r">5 V · 10 A · 50 W</td><td>boîtier à bornier</td><td class="r">13,95 €</td><td><span class="pill good">config. A · recommandé</span></td></tr>
+        <tr><td><b>Mean Well LRS-100-5</b><span class="where caption" style="display:block">129×97×30 mm, 3 bornes + et 3 bornes −, sans ventilateur</span></td><td class="r">5 V · 18 A · 90 W</td><td>boîtier à bornier</td><td class="r">≈ 14–18 €</td><td><span class="pill good">config. B et C</span> (2 panneaux)</td></tr>
+        <tr><td><b>Mean Well LRS-150F-5</b><span class="where caption" style="display:block">159×97×30 mm, en stock chez Reichelt France</span></td><td class="r">5 V · 22 A · 110 W</td><td>boîtier à bornier</td><td class="r">24,25 €</td><td><span class="pill acc">3 ou 4 panneaux</span></td></tr>
+        <tr><td><b>Mean Well LRS-200-5</b><span class="where caption" style="display:block">215×115×30 mm, pour un très grand mur (6 à 8 panneaux)</span></td><td class="r">5 V · 40 A · 200 W</td><td>boîtier à bornier</td><td class="r">≈ 41–44 €</td><td><span class="pill acc">évolution</span></td></tr>
         <tr><td>Boîtiers génériques « 5 V 20 A » sans marque</td><td class="r">annoncé 20 A</td><td>boîtier à bornier</td><td class="r">≈ 15–22 €</td><td><span class="pill bad">à éviter</span> courant souvent surestimé</td></tr>
-        <tr><td>Chargeur USB-C Power Delivery</td><td class="r">5 V · 3 A max.</td><td>USB-C</td><td class="r">–</td><td><span class="pill bad">insuffisant</span> moins d'un panneau et demi</td></tr>
+        <tr><td>Chargeur USB-C Power Delivery</td><td class="r">5 V · 3 A max.</td><td>USB-C</td><td class="r">–</td><td><span class="pill bad">insuffisant</span> moins d'un panneau</td></tr>
       </tbody>
     </table>
   </div>
@@ -519,25 +536,26 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
       <div class="toolbar"><h3>Courant selon la luminosité</h3><div class="seg" id="pwrSeg" role="group" aria-label="Configuration pour le graphique"></div></div>
       <div class="legend"><span><i class="line" style="background:var(--s2)"></i>Blanc plein (pire cas)</span><span><i class="line" style="background:var(--s1)"></i>Animations colorées (estimation)</span></div>
       <svg class="chart" id="chartPower" viewBox="0 0 560 280" role="img" aria-label="Courant en ampères selon la luminosité"></svg>
-      <figcaption>Pire cas d'après les fiches techniques (2,5 A par P2.5 64×32, 4 A par P4 64×32). La ligne grise est l'alimentation conseillée pour la configuration choisie. La courbe « animations » est une estimation à 30 % du pire cas. Survole le graphique pour lire les valeurs.</figcaption>
+      <figcaption>Pire cas d'après les fiches techniques (≈ 5 A par panneau P2.5 128×64). La ligne grise est l'alimentation conseillée pour la configuration choisie. La courbe « animations » est une estimation à 30 % du pire cas. Survole le graphique pour lire les valeurs.</figcaption>
     </figure>
     <div class="prose">
       <h3>Mon conseil</h3>
-      <p><strong>Pour 4 panneaux P2.5 (config. B) : une Mean Well LRS-100-5.</strong> Avec 18 A pour 10 A au maximum, elle garde 80 % de marge, reste froide et coûte moins de 20 €. Mean Well est la référence des alimentations LED : les courants annoncés sont réels.</p>
-      <p><strong>Ta propre alimentation convient</strong> si son étiquette indique 5 V et au moins 10 A. Avec 6 à 8 A, bride la luminosité à 50 % dans le logiciel.</p>
-      <p><strong>Pour 2 panneaux (config. A),</strong> le bloc GST60A05 suffit et évite tout câblage 230 V.</p>
+      <p><strong>Pour un panneau (config. A) : une Mean Well LRS-50-5.</strong> Avec 10 A pour 5 A au maximum, elle garde 100 % de marge, reste froide et coûte 13,95 €. Mean Well est la référence des alimentations LED : les courants annoncés sont réels.</p>
+      <p><strong>Pour deux panneaux (config. B ou C) : une LRS-100-5</strong> (18 A). Si tu penses ajouter le deuxième panneau plus tard, prends-la tout de suite : 3 € de plus seulement.</p>
+      <p><strong>Ta propre alimentation convient</strong> si son étiquette indique 5 V et au moins 6 A pour un panneau (10 A pour deux).</p>
+      <p><strong>Sans toucher au 230 V,</strong> le bloc fermé GST60A05 (6 A) alimente un panneau, avec une marge juste. Bride alors la luminosité à 80 %.</p>
     </div>
   </div>
 
   <div class="two">
-    <div class="card trap" style="border-left-color:var(--bad);align-self:start">
+    <div class="card trap" style="border-left-color:var(--bad)">
       <h3>Brancher une LRS en sécurité</h3>
       <p>Les LRS ont un bornier à vis pour le 230 V. Câble-les <strong>hors tension</strong>, avec un câble 3 fils dont la terre va sur la borne ⏚. Ajoute une embase IEC C14 avec fusible et interrupteur (3 à 6 €) et un cache imprimé sur le bornier, pour qu'aucune vis sous tension ne reste accessible. Si tu n'as jamais câblé du 230 V, fais vérifier par quelqu'un qui sait, ou passe par un bloc externe fermé.</p>
     </div>
     <div class="prose">
       <h3>Côté 5 V</h3>
-      <p><strong>En étoile :</strong> un câble par panneau, depuis le bornier de l'alim ou un bloc Wago. Le câble 4 broches livré avec le panneau suffit. Tronc de 1,5 mm² (16 AWG) entre l'alim et le Wago.</p>
-      <p><strong>Un fusible de 15 A</strong> sur le tronc et <strong>un condensateur de 1000 µF</strong> (10 V ou plus) sur chaque panneau.</p>
+      <p><strong>En étoile :</strong> un câble par panneau, depuis le bornier de l'alim ou un bloc Wago. Le câble 4 broches livré avec le panneau suffit. Avec deux panneaux, tronc de 1,5 mm² (16 AWG) entre l'alim et le Wago.</p>
+      <p><strong>Un fusible</strong> de 10 A (un panneau) ou 15 A (deux panneaux) sur le tronc, et <strong>un condensateur de 1000 µF</strong> (10 V ou plus) aux bornes de chaque panneau.</p>
       <p><strong>Masse commune</strong> entre l'ESP32 et les panneaux. Alimente l'ESP32 par sa broche 5V depuis la même alim, mais pas en même temps que l'USB si la carte n'a pas de diode.</p>
       <p><strong>Évite les jacks 5,5 mm au-delà de 6 A :</strong> ils chauffent. Au-delà, bornier à vis ou XT60.</p>
       <p><strong>WLED ne limite pas le courant en HUB75.</strong> Règle la luminosité maximale à la main.</p>
@@ -550,7 +568,7 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="head">
     <p class="eyebrow">Plateau P2S : 256 × 256 mm</p>
     <h2>Cadre imprimé en 3D</h2>
-    <p class="lede">L'écran fini mesure environ 336×176 mm avec ses bords, trop large pour le plateau de la P2S. On imprime donc deux moitiés de 168×176 mm, une par colonne de panneaux, dont le joint tombe pile sur la jonction entre panneaux.</p>
+    <p class="lede">Le cadre fini mesure environ 336×176 mm avec ses bords, trop large pour le plateau de la P2S. On imprime donc deux moitiés de 168×176 mm, assemblées au milieu. Le panneau étant d'un seul tenant, le joint ne traverse que le bord du cadre, en haut et en bas.</p>
   </div>
   <div class="two">
     <figure class="card">
@@ -564,19 +582,17 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
         <rect x="14" y="34" width="218" height="218" rx="4" class="box2" stroke-dasharray="6 4"/>
         <rect x="52" y="68" width="143" height="150" rx="3" class="box"/>
         <rect x="58" y="74" width="136" height="138" fill="url(#dotsSmall)" stroke="none"/>
-        <line x1="58" y1="143" x2="194" y2="143" class="thin"/>
-        <text x="123" y="240" text-anchor="middle" class="mut">½ cadre · 168 × 176 mm</text>
+                <text x="123" y="240" text-anchor="middle" class="mut">½ cadre · 168 × 176 mm</text>
         <text x="123" y="280" text-anchor="middle">×2 impressions</text>
         <path d="M244 143 H262" class="data" marker-end="url(#arr2)"/>
         <text x="270" y="22" class="mut">CADRE ASSEMBLÉ · 336 × 176 mm</text>
         <rect x="270" y="68" width="286" height="150" rx="4" class="box"/>
         <rect x="276" y="74" width="274" height="138" fill="url(#dotsSmall)" stroke="none"/>
-        <line x1="276" y1="143" x2="550" y2="143" class="thin"/>
-        <line x1="413" y1="68" x2="413" y2="218" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>
-        <text x="413" y="240" text-anchor="middle" class="mut">joint sur la jonction des panneaux</text>
+                <line x1="413" y1="68" x2="413" y2="218" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="413" y="240" text-anchor="middle" class="mut">joint au milieu, sur le bord seulement</text>
         <text x="413" y="258" text-anchor="middle" class="mut">queue d'aronde + 4 vis M3</text>
       </svg>
-      <figcaption>Dessiné à l'échelle. Chaque moitié porte deux panneaux superposés (trait fin) et sa part du bord. Elle s'imprime à plat en PETG ou ASA.</figcaption>
+      <figcaption>Dessiné à l'échelle. Chaque moitié porte une moitié du panneau et sa part du bord. Elle s'imprime à plat en PETG ou ASA. Pour la config. B (carré 320×320), on imprime 4 quarts ; pour la C (bandeau 640×160), 4 morceaux de 168×176.</figcaption>
     </figure>
     <figure class="card">
       <svg class="diagram big" viewBox="0 0 560 330" role="img" aria-labelledby="stackTitle">
@@ -623,13 +639,13 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="two">
     <div class="prose">
       <h3>La grille de pixels au pas de 2,5 mm</h3>
-      <p>C'est faisable, mais c'est la pièce la plus délicate : 2 048 alvéoles par panneau, des parois de 0,4 à 0,5 mm et des ouvertures d'environ 2 mm. Avec la buse de 0,4 mm, on imprime des parois simples, fragiles. Une <strong>buse de 0,2 mm</strong> donne un résultat bien plus propre. Chaque grille de 160×80 mm s'imprime en une fois.</p>
+      <p>C'est faisable, mais c'est la pièce la plus délicate : 8 192 alvéoles pour le panneau, des parois de 0,4 à 0,5 mm et des ouvertures d'environ 2 mm. Avec la buse de 0,4 mm, on imprime des parois simples, fragiles. Une <strong>buse de 0,2 mm</strong> donne un résultat bien plus propre. La grille de 320×160 mm ne tient pas sur le plateau : imprime-la en deux carrés de 160×160 mm (64×64 alvéoles), à bords ouverts pour qu'ils se rejoignent sans double paroi.</p>
       <p>Imprime d'abord un coupon d'essai de 16×16 alvéoles et vérifie qu'il tombe pile sur les LED. Un écart de 0,3 % fait déjà 0,5 mm de décalage sur 160 mm. Corrige ensuite l'échelle X/Y dans le trancheur. Le générateur OpenSCAD « Customizable LED matrix diffuser grid » sur Thingiverse fait des grilles qui s'emboîtent sans double paroi.</p>
     </div>
     <div class="prose">
       <h3>Matières et fixation</h3>
-      <p><strong>PETG ou ASA noir mat</strong> pour le cadre : les panneaux chauffent à forte luminosité, et le PLA ramollit vers 55–60 °C. <strong>PLA noir mat</strong> pour les grilles, qui se déforment moins. Compte 300 à 400 g de filament en tout.</p>
-      <p>Les panneaux ont des inserts M3 au dos. Visse-les dans des pattes imprimées avec des vis M3 × 8 mm, et assemble les deux moitiés avec des inserts à chaud. L'écran pèse environ 1,2 kg.</p>
+      <p><strong>PETG ou ASA noir mat</strong> pour le cadre : les panneaux chauffent à forte luminosité, et le PLA ramollit vers 55–60 °C. <strong>PLA noir mat</strong> pour les grilles, qui se déforment moins. Compte 300 à 400 g de filament par panneau.</p>
+      <p>Le panneau a des plots M3 au dos (souvent avec des vis aimantées). Visse-le dans des pattes imprimées avec des vis M3 × 8 mm, et assemble les deux moitiés avec des inserts à chaud. L'ensemble pèse moins de 1 kg.</p>
     </div>
   </div>
 </section>
@@ -639,49 +655,45 @@ footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line
   <div class="head">
     <p class="eyebrow">Trois façons de le piloter</p>
     <h2>Logiciel</h2>
-    <p class="lede">Si ton panneau actuel tourne sous WLED, c'est le chemin le plus court : depuis la version 16, WLED gère le HUB75 sur ESP32-S3. Avec quatre 64×32, la charge est deux fois plus légère qu'avec des 64×64.</p>
+    <p class="lede">Si ton panneau actuel tourne sous WLED, c'est le chemin le plus court : depuis la version 16, WLED gère le HUB75 sur ESP32-S3, panneaux 128×64 compris. Pour ce format, la documentation WLED conseille une carte avec PSRAM, ce qui est le cas de ton N16R8.</p>
   </div>
   <div class="paths">
     <div class="card"><span class="pill good" style="justify-self:start">le plus simple</span><h3>WLED 16.0.1 ou plus</h3>
-      <ul><li>Flash du binaire officiel <code>ESP32-S3_16MB_opi_HUB75.bin</code>, sans compiler</li><li>Mêmes effets, appli et intégration Home Assistant que tes WS2812</li><li>Micro INMP441 pris en charge : effets qui réagissent au son</li><li>Réglage : sortie HUB75, panneaux 64×32, 4 panneaux en 2×2, puis une matrice 2D de 128×64</li><li>Limite : brochage figé à la compilation</li></ul></div>
+      <ul><li>Flash du binaire officiel <code>ESP32-S3_16MB_opi_HUB75.bin</code>, sans compiler</li><li>Mêmes effets, appli et intégration Home Assistant que tes WS2812</li><li>Micro INMP441 pris en charge : effets qui réagissent au son</li><li>Réglage : sortie HUB75, panneau 128×64, 1 panneau, puis une matrice 2D de 128×64</li><li>Limite : brochage figé à la compilation</li></ul></div>
     <div class="card"><span class="pill acc" style="justify-self:start">contrôle total</span><h3>Arduino + ESP32-HUB75-MatrixPanel-DMA</h3>
-      <ul><li>64×32 est la taille par défaut de la librairie</li><li>Exemples fournis : AuroraDemo, GIF animés, double tampon</li><li>Compatible Adafruit GFX et FastLED : ton code d'effets se porte facilement</li></ul></div>
+      <ul><li>Un seul panneau : pas besoin de panneau virtuel</li><li>Exemples fournis : AuroraDemo, GIF animés, double tampon</li><li>Compatible Adafruit GFX et FastLED : ton code d'effets se porte facilement</li></ul></div>
     <div class="card"><span class="pill warn" style="justify-self:start">domotique</span><h3>ESPHome 2025.12 ou plus</h3>
       <ul><li>Composant <code>hub75</code> natif, avec LVGL</li><li>Idéal pour un tableau de bord Home Assistant : météo, horloge, capteurs</li><li>Moins adapté aux effets animés</li></ul></div>
   </div>
   <div class="two wide-left">
     <figure>
 <pre><span class="c">// PlatformIO : lib_deps = mrcodetastic/ESP32 HUB75 LED MATRIX PANEL DMA Display</span>
-<span class="k">#include</span> &lt;ESP32-HUB75-VirtualMatrixPanel_T.hpp&gt;
+<span class="k">#include</span> &lt;ESP32-HUB75-MatrixPanel-I2S-DMA.h&gt;
 
-<span class="k">#define</span> PANEL_W 64
-<span class="k">#define</span> PANEL_H 32   <span class="c">// panneaux 64×32, scan 1/16</span>
-<span class="k">#define</span> ROWS 2       <span class="c">// 2 rangées de panneaux</span>
-<span class="k">#define</span> COLS 2       <span class="c">// 2 panneaux par rangée</span>
+<span class="k">#define</span> PANEL_W 128
+<span class="k">#define</span> PANEL_H 64   <span class="c">// P2.5 128×64, scan 1/32</span>
+<span class="k">#define</span> CHAIN   1    <span class="c">// 2 quand tu ajouteras le 2e panneau</span>
 
 <span class="c">//                        R1 G1 B1 R2 G2  B2  A  B  C  D   E  LAT OE CLK</span>
-HUB75_I2S_CFG::i2s_pins pins = {4, 5, 6, 7, 15, 16, 18, 8, 3, 42, -1, 40, 2, 41};
+HUB75_I2S_CFG::i2s_pins pins = {4, 5, 6, 7, 15, 16, 18, 8, 3, 42, 9, 40, 2, 41};
 
-MatrixPanel_I2S_DMA *dma;
-VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 128×64</span>
+MatrixPanel_I2S_DMA *ecran;
 
 <span class="k">void</span> setup() {
-  HUB75_I2S_CFG cfg(PANEL_W, PANEL_H, ROWS * COLS, pins);
+  HUB75_I2S_CFG cfg(PANEL_W, PANEL_H, CHAIN, pins);
   cfg.i2sspeed = HUB75_I2S_CFG::HZ_16M;
   cfg.clkphase = false;
   <span class="c">// cfg.driver = HUB75_I2S_CFG::FM6126A;  // si panneaux FM6126A / ICN2038S</span>
-  dma = <span class="k">new</span> MatrixPanel_I2S_DMA(cfg);
-  dma-&gt;begin();
-  dma-&gt;setBrightness8(128);              <span class="c">// 50 %, ménage l'alim</span>
-  ecran = <span class="k">new</span> VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt;(ROWS, COLS, PANEL_W, PANEL_H);
-  ecran-&gt;setDisplay(*dma);
+  ecran = <span class="k">new</span> MatrixPanel_I2S_DMA(cfg);
+  ecran-&gt;begin();
+  ecran-&gt;setBrightness8(128);            <span class="c">// 50 %, ménage l'alim</span>
   ecran-&gt;drawPixel(0, 0, ecran-&gt;color565(255, 180, 58)); <span class="c">// coin haut-gauche</span>
 }</pre>
-      <figcaption>Point de départ Arduino pour un 128×64 en panneaux 64×32. La broche E est à -1 : elle ne sert pas en scan 1/16.</figcaption>
+      <figcaption>Point de départ Arduino pour le panneau 128×64. La broche E est sur le GPIO 9 : elle est indispensable en scan 1/32.</figcaption>
     </figure>
     <div class="prose">
       <h3>Couleurs ou fluidité</h3>
-      <p>Le HUB75 crée ses nuances en allumant chaque LED plus ou moins longtemps. Chaque bit de couleur en plus divise le rafraîchissement par deux. Un panneau en scan 1/16 n'a que 16 lignes à balayer au lieu de 32, ce qui double le rafraîchissement. Pour 4 panneaux 64×32 chaînés (estimation d'après la formule de la librairie) :</p>
+      <p>Le HUB75 crée ses nuances en allumant chaque LED plus ou moins longtemps. Chaque bit de couleur en plus divise le rafraîchissement par deux. Pour un panneau 128×64 en scan 1/32 (estimation d'après la formule de la librairie) :</p>
       <div class="card scroll-x" style="padding:4px 6px">
         <table>
           <thead><tr><th>Couleur</th><th class="r">10 MHz</th><th class="r">16 MHz</th></tr></thead>
@@ -700,12 +712,12 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
     <h2>Étapes de construction</h2>
   </div>
   <ol class="steps">
-    <li><h3>Commander les panneaux et l'alimentation</h3><p>Les 4 panneaux <strong>dans la même annonce</strong> (même lot, 3 € de douane une seule fois). Demande la puce au vendeur. L'alimentation Mean Well arrive en 3 à 4 jours depuis Reichelt.</p></li>
-    <li><h3>Tester un panneau seul</h3><p>ESP32 + 1 panneau + alim 5 V. Flashe WLED HUB75 ou l'exemple <code>1_SimpleTestShapes</code> de la librairie. Si l'image est décalée ou en double, essaie <code>clkphase</code> et le pilote FM6126A.</p></li>
+    <li><h3>Commander le panneau et l'alimentation</h3><p>Demande la puce au vendeur avant de payer. Si tu vises la config. B ou C, prends les deux panneaux <strong>dans la même annonce</strong> (même lot, 3 € de douane une seule fois). L'alimentation Mean Well arrive en 3 à 4 jours depuis Reichelt.</p></li>
+    <li><h3>Tester le panneau à nu</h3><p>ESP32 + panneau + alim 5 V, avant tout montage. Flashe WLED HUB75 ou l'exemple <code>1_SimpleTestShapes</code> de la librairie. Si l'image est décalée ou en double, essaie <code>clkphase</code> et le pilote FM6126A.</p></li>
     <li><h3>Imprimer le coupon de grille</h3><p>16×16 alvéoles en PLA noir mat, buse de 0,2 mm si possible. Ajuste l'échelle X/Y jusqu'à ce qu'il tombe pile sur les LED.</p></li>
-    <li><h3>Imprimer les deux moitiés du cadre et le boîtier d'alim</h3><p>PETG ou ASA noir. Pose les inserts M3 à chaud. Assemble à blanc pour vérifier l'alignement du joint.</p></li>
-    <li><h3>Câbler en 2×2</h3><p>Panneaux du bas tournés de 180°. Nappes courtes entre panneaux, alimentation en étoile, un condensateur par panneau, masse commune avec l'ESP32.</p></li>
-    <li><h3>Configurer l'affichage 128×64</h3><p>Dans WLED : 4 panneaux 64×32 en 2×2, puis une matrice 2D unique de 128×64. Redémarre après chaque changement HUB75. Teste avec un dégradé pour vérifier l'ordre des panneaux.</p></li>
+    <li><h3>Imprimer les deux moitiés du cadre, les grilles et le boîtier d'alim</h3><p>PETG ou ASA noir. Pose les inserts M3 à chaud. Assemble à blanc pour vérifier l'alignement du joint.</p></li>
+    <li><h3>Câbler</h3><p>Une nappe de l'ESP32 vers la prise IN, le câble 5 V vers l'alimentation, un condensateur aux bornes du panneau, masse commune avec l'ESP32.</p></li>
+    <li><h3>Configurer l'affichage 128×64</h3><p>Dans WLED : sortie HUB75, panneau 128×64, puis une matrice 2D de 128×64. Redémarre après chaque changement HUB75. Teste avec un dégradé pour vérifier l'orientation.</p></li>
     <li><h3>Grilles, diffuseur, fond</h3><p>Pose les grilles, le plexi, puis ferme avec le fond MDF percé de fentes d'aération. Règle la luminosité max. vers 50 %.</p></li>
   </ol>
 </section>
@@ -717,14 +729,14 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
     <h2>Pièges à éviter</h2>
   </div>
   <div class="traps">
-    <div class="card trap"><h3>Panneau « outdoor » 1/8 scan</h3><p>Même en 64×32, un panneau d'extérieur en scan 1/8 demande une table de correspondance de pixels personnalisée. Prends « indoor 1/16 ».</p></div>
+    <div class="card trap"><h3>128×64 « 3840 Hz », « outdoor » ou « 16 Scan »</h3><p>Puces S-PWM incompatibles ou correspondance de pixels personnalisée. Prends « indoor, 32 Scan ».</p></div>
     <div class="card trap"><h3>GPIO 26 à 37 sur le N16R8</h3><p>Ils servent à la flash et à la PSRAM octale. Les utiliser fait planter la carte au démarrage. Ça vaut aussi pour certaines cartes support (Seengreat V1).</p></div>
     <div class="card trap"><h3>230 V mal protégé</h3><p>Le bornier secteur d'une LRS est à nu. Terre raccordée, cache sur le bornier, embase avec fusible. Sinon, bloc externe fermé.</p></div>
-    <div class="card trap w"><h3>Alimentation sous-dimensionnée</h3><p>Un flash blanc fait chuter la tension : l'ESP32 redémarre ou les couleurs virent au rouge. Prends au moins 10 A pour 4 panneaux P2.5, avec un condensateur par panneau.</p></div>
-    <div class="card trap w"><h3>Panneaux de lots différents</h3><p>Deux lots n'ont pas toujours la même teinte ni la même puce. Commande les quatre ensemble.</p></div>
+    <div class="card trap w"><h3>Broche E oubliée</h3><p>Un panneau de 64 lignes en scan 1/32 a besoin des lignes A à E. Sans E, seule une moitié de l'image s'affiche, en double.</p></div>
+    <div class="card trap w"><h3>Alimentation sous-dimensionnée</h3><p>Un flash blanc fait chuter la tension : l'ESP32 redémarre ou les couleurs virent au rouge. Au moins 6 A par panneau, et un condensateur de 1000 µF.</p></div>
     <div class="card trap w"><h3>Cadre en PLA à pleine luminosité</h3><p>Le dos des panneaux chauffe. Prends du PETG ou de l'ASA, aère le haut et le bas, et bride la luminosité.</p></div>
   </div>
-  <p class="note"><strong>Pour plus tard :</strong> quatre panneaux 64×32 de plus donnent un 128×128 (32×32 cm), ou un bandeau de 256×64. Une LRS-150F-5 suffit pour 8 panneaux P2.5, et ton ESP32-S3 tient la charge.</p>
+  <p class="note"><strong>Pour plus tard :</strong> un deuxième panneau 128×64 donne un carré de 128×128 (32×32 cm) ou un bandeau de 256×64 (64×16 cm). Il suffit d'une nappe de plus, de passer <code>CHAIN</code> à 2, et d'une LRS-100-5. Ton ESP32-S3 tient la charge.</p>
 </section>
 
 <!-- SOURCES -->
@@ -736,6 +748,9 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
   </div>
   <ul class="sources">
     <li><a href="https://docs.waveshare.com/RGB-Matrix-Px-64x32" target="_blank" rel="noopener">Waveshare : documentation des panneaux 64×32</a></li>
+    <li><a href="https://www.aliexpress.com/w/wholesale-p2.5-128x64-hub75.html" target="_blank" rel="noopener">AliExpress : panneaux P2.5 128×64 320×160 mm</a></li>
+    <li><a href="https://www.amazon.fr/HCLZOE-DAffichage-Polychrome-DInt%C3%A9rieur-320x160mm/dp/B0DS2J3ZRL" target="_blank" rel="noopener">Amazon.fr : lot de 2 P2.5 128×64 (HCLZOE)</a></li>
+    <li><a href="https://github.com/mrcodetastic/ESP32-HUB75-MatrixPanel-DMA/issues/642" target="_blank" rel="noopener">Librairie : panneau 128×64 avec puce FM6363, incompatible</a></li>
     <li><a href="https://www.aliexpress.com/w/wholesale-p2.5-64x32-led-matrix.html" target="_blank" rel="noopener">AliExpress : panneaux P2.5 64×32</a></li>
     <li><a href="https://github.com/mrcodetastic/ESP32-HUB75-MatrixPanel-DMA" target="_blank" rel="noopener">Librairie ESP32-HUB75-MatrixPanel-DMA</a> : puces, mémoire, exemples</li>
     <li><a href="https://kno.wled.ge/advanced/HUB75/" target="_blank" rel="noopener">Documentation WLED HUB75</a></li>
@@ -880,12 +895,12 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
 
   /* ---------- Data ---------- */
   const CONFIGS = {
-    A: { name: 'Bandeau', res: '128×32', px: 4096, mm: '320×80 mm', w: 320, h: 80, grid: [2, 1], panels: '2× P2.5 64×32', esp: 1, ampMax: 5, psu: ['GST60A05', 6],
-         blurb: 'Exactement la place de ta matrice 8×32, avec 16 fois plus de pixels. Le cadre actuel peut presque resservir.' },
-    B: { name: 'Écran 2×2', res: '128×64', px: 8192, mm: '320×160 mm', w: 320, h: 160, grid: [2, 2], panels: '4× P2.5 64×32', esp: 1, ampMax: 10, psu: ['LRS-100-5', 18],
-         blurb: 'Même largeur que ton panneau actuel, deux fois plus haut, 32 fois plus de pixels. Texte sur deux lignes, GIF, horloge, vu-mètre.' },
-    C: { name: 'Grand format', res: '128×64', px: 8192, mm: '512×256 mm', w: 512, h: 256, grid: [2, 2], panels: '4× P4 64×32', esp: 1, ampMax: 16, psu: ['LRS-150F-5', 22],
-         blurb: 'Même résolution que B, mais au pas de 4 mm : un écran de 51 cm qui se voit de loin. La grille de pixels s’imprime facilement.' }
+    A: { name: 'Panneau unique', res: '128×64', px: 8192, mm: '320×160 mm', w: 320, h: 160, grid: [1, 1], panels: '1× P2.5 128×64', esp: 1, ampMax: 5, psu: ['LRS-50-5', 10],
+         blurb: 'Même largeur que ta matrice actuelle, deux fois plus haut, 32 fois plus de pixels, sans aucun raccord. Texte sur deux lignes, GIF, horloge, vu-mètre.' },
+    B: { name: 'Carré', res: '128×128', px: 16384, mm: '320×320 mm', w: 320, h: 320, grid: [1, 2], panels: '2× P2.5 128×64 superposés', esp: 1, ampMax: 10, psu: ['LRS-100-5', 18],
+         blurb: 'Le format des cadres pixel art (Divoom, Tidbyt). GIF 128×128, visualiseur audio, météo. Un seul raccord, horizontal.' },
+    C: { name: 'Bandeau', res: '256×64', px: 16384, mm: '640×160 mm', w: 640, h: 160, grid: [2, 1], panels: '2× P2.5 128×64 côte à côte', esp: 1, ampMax: 10, psu: ['LRS-100-5', 18],
+         blurb: 'Le même format allongé que ta matrice 8×32, en deux fois plus long. Idéal pour texte défilant et horloge géante.' }
   };
 
   const CATS = [
@@ -895,25 +910,25 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
     { id: 'alim', label: 'Alimentation', color: 'var(--s4)' }
   ];
 
-  // price per config; ws = price with Waveshare panels
+  // price per config; ws = price when buying the Amazon.fr 2-pack instead
   const BOM = [
-    { id: 'panels', cat: 'pan', name: { A: '2× panneau P2.5 64×32 indoor 1/16 scan', B: '4× panneau P2.5 64×32 indoor 1/16 scan', C: '4× panneau P4 64×32 indoor 1/16 scan' },
-      where: { A: 'AliExpress Muen, une seule annonce (≈ 10 € pièce + 3 € de douane) · câbles fournis', B: 'AliExpress Muen, une seule annonce (≈ 10 € pièce + 3 € de douane) · câbles fournis', C: 'AliExpress EVERSHINE, une seule annonce (≈ 11 € pièce + 3 € de douane)' },
-      price: { A: 23, B: 43, C: 47 }, ws: { A: 45, B: 85, C: 85 },
-      wsWhere: { A: 'Waveshare RGB-Matrix-P2.5-64x32, 2× 17,99 $ HT + TVA et port', B: 'Waveshare RGB-Matrix-P2.5-64x32, 4× 17,99 $ HT + TVA et port', C: 'Waveshare RGB-Matrix-P4-64x32, 4× 17,99 $ HT + TVA et port' } },
-    { id: 'psu', cat: 'alim', name: { A: 'Mean Well GST60A05-P1J (bloc 5 V 6 A)', B: 'Mean Well LRS-100-5 (5 V 18 A)', C: 'Mean Well LRS-150F-5 (5 V 22 A)' },
-      where: { A: 'welectron.com · bloc fermé, aucun câblage 230 V', B: 'Reichelt / comparateur dès 13,47 € · décoche si ton alim fait déjà 5 V ≥ 10 A', C: 'Reichelt FR, en stock · décoche si ton alim fait déjà 5 V ≥ 16 A' },
-      price: { A: 18.9, B: 16, C: 24.25 } },
-    { id: 'inlet', cat: 'alim', name: 'Embase secteur IEC C14 avec fusible et interrupteur + cordon 3 fils', where: 'Reichelt / Amazon.fr · pour câbler la LRS en sécurité · ≈', price: { A: 0, B: 8, C: 8 } },
+    { id: 'panels', cat: 'pan', name: { A: '1× panneau P2.5 128×64 320×160 mm, indoor 32 Scan', B: '2× panneau P2.5 128×64 320×160 mm, indoor 32 Scan', C: '2× panneau P2.5 128×64 320×160 mm, indoor 32 Scan' },
+      where: { A: 'AliExpress, annonce aux 500+ ventes (≈ 18 € + 3 € de douane) · câbles fournis', B: 'AliExpress, une seule annonce (2× ≈ 18 € + 3 € de douane) · câbles fournis', C: 'AliExpress, une seule annonce (2× ≈ 18 € + 3 € de douane) · câbles fournis' },
+      price: { A: 21, B: 39, C: 39 }, ws: { A: 45.77, B: 45.77, C: 45.77 },
+      wsWhere: { A: 'Amazon.fr HCLZOE, lot de 2 : un panneau de rechange ou pour l’évolution', B: 'Amazon.fr HCLZOE, lot de 2 · sans douane, livraison rapide', C: 'Amazon.fr HCLZOE, lot de 2 · sans douane, livraison rapide' } },
+    { id: 'psu', cat: 'alim', name: { A: 'Mean Well LRS-50-5 (5 V 10 A)', B: 'Mean Well LRS-100-5 (5 V 18 A)', C: 'Mean Well LRS-100-5 (5 V 18 A)' },
+      where: { A: 'Reichelt · décoche si ton alim fait déjà 5 V ≥ 6 A', B: 'Reichelt / comparateur dès 13,47 € · décoche si ton alim fait déjà 5 V ≥ 10 A', C: 'Reichelt / comparateur dès 13,47 € · décoche si ton alim fait déjà 5 V ≥ 10 A' },
+      price: { A: 13.95, B: 16, C: 16 } },
+    { id: 'inlet', cat: 'alim', name: 'Embase secteur IEC C14 avec fusible et interrupteur + cordon 3 fils', where: 'Reichelt / Amazon.fr · pour câbler la LRS en sécurité · ≈', price: { A: 8, B: 8, C: 8 } },
     { id: 'esp', cat: 'elec', name: 'ESP32-S3-N16R8', where: 'Déjà en stock (tu en as 2 de rechange)', price: { A: 9, B: 9, C: 9 }, owned: true },
     { id: 'ribbon', cat: 'elec', name: 'Nappes HUB75 16 broches 40 cm, lot de 10', where: 'AliExpress · rechange et liaison ESP32 → panneau', price: { A: 8, B: 8, C: 8 } },
-    { id: 'protect', cat: 'elec', name: { A: 'Condensateurs 1000 µF 10 V, Wago 221', B: 'Condensateurs 1000 µF 10 V, porte-fusible + fusible 15 A, Wago 221', C: 'Condensateurs 1000 µF 10 V, porte-fusible + fusible 20 A, Wago 221' }, where: 'Reichelt (Wago 0,55 € pièce) · ≈', price: { A: 4, B: 10, C: 10 } },
+    { id: 'protect', cat: 'elec', name: { A: 'Condensateur 1000 µF 10 V, porte-fusible + fusible 10 A, Wago 221', B: 'Condensateurs 1000 µF 10 V, porte-fusible + fusible 15 A, Wago 221', C: 'Condensateurs 1000 µF 10 V, porte-fusible + fusible 15 A, Wago 221' }, where: 'Reichelt (Wago 0,55 € pièce) · ≈', price: { A: 7, B: 10, C: 10 } },
     { id: 'wire', cat: 'elec', name: { A: 'Fil silicone 18 AWG rouge + noir', B: 'Fil silicone 16 AWG (tronc) + 18 AWG (panneaux)', C: 'Fil silicone 16 AWG (tronc) + 18 AWG (panneaux)' }, where: 'Amazon.fr, bobines de 5 m · ≈', price: { A: 8, B: 14, C: 14 } },
     { id: 'shifter', cat: 'elec', name: 'Carte support Seengreat (E) V2 avec 74HCT245', where: 'Seulement en cas de scintillement · prends bien la V2', price: { A: 12, B: 12, C: 12 }, opt: true },
     { id: 'inserts', cat: 'cadre', name: 'Inserts M3 à chaud + vis M3 (lots de 100)', where: 'Amazon.fr · ≈', price: { A: 10, B: 10, C: 10 } },
-    { id: 'fil', cat: 'cadre', name: { A: 'PETG HF noir 1 kg (Bambu)', B: 'PETG HF noir 1 kg (Bambu)', C: 'PETG HF noir 1 kg (Bambu)' }, where: 'Atome3D · décoche si tu as déjà une bobine', price: { A: 22, B: 22, C: 22 } },
-    { id: 'diff', cat: 'cadre', name: { A: 'Plexiglas LED 9H04 SC 3 mm, 330×90 mm', B: 'Plexiglas LED 9H04 SC 3 mm, 330×170 mm', C: 'Plexiglas LED 9H04 SC 3 mm, 520×265 mm' }, where: 'acrylglas-shop.com, découpe offerte · port ≈ 10 €', price: { A: 15, B: 19, C: 31 } },
-    { id: 'back', cat: 'cadre', name: 'Fond MDF 3 mm', where: 'Magasin de bricolage · ≈', price: { A: 3, B: 5, C: 8 } },
+    { id: 'fil', cat: 'cadre', name: 'PETG HF noir 1 kg (Bambu)', where: 'Atome3D · décoche si tu as déjà une bobine', price: { A: 22, B: 22, C: 22 } },
+    { id: 'diff', cat: 'cadre', name: { A: 'Plexiglas LED 9H04 SC 3 mm, 330×170 mm', B: 'Plexiglas LED 9H04 SC 3 mm, 330×330 mm', C: 'Plexiglas LED 9H04 SC 3 mm, 650×170 mm' }, where: 'acrylglas-shop.com, découpe offerte · port ≈ 10 €', price: { A: 19, B: 27, C: 27 } },
+    { id: 'back', cat: 'cadre', name: 'Fond MDF 3 mm', where: 'Magasin de bricolage · ≈', price: { A: 5, B: 5, C: 5 } },
     { id: 'mic', cat: 'elec', name: 'Micro I2S INMP441', where: 'Amazon.fr · effets qui réagissent au son', price: { A: 11, B: 11, C: 11 }, opt: true },
     { id: 'sensors', cat: 'elec', name: 'Capteur de lumière BH1750 + horloge DS3231', where: 'Reichelt · luminosité automatique, heure sans Wi-Fi', price: { A: 7.04, B: 7.04, C: 7.04 }, opt: true },
     { id: 'enc', cat: 'elec', name: 'Encodeur rotatif KY-040', where: 'Reichelt · bouton de luminosité / effet', price: { A: 2.26, B: 2.26, C: 2.26 }, opt: true }
@@ -922,13 +937,13 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
   const pick = (v, c) => (v && typeof v === 'object') ? v[c] : v;
 
   /* ---------- State ---------- */
-  const state = { cfg: 'B', ws: false, on: {} };
+  const state = { cfg: 'A', ws: false, on: {} };
   BOM.forEach(it => { state.on[it.id] = !it.owned && !it.opt; });
   try {
-    const saved = JSON.parse(localStorage.getItem('panelbuild-64x32') || 'null');
-    if (saved && saved.on) { Object.assign(state.on, saved.on); state.cfg = CONFIGS[saved.cfg] ? saved.cfg : 'B'; state.ws = !!saved.ws; }
+    const saved = JSON.parse(localStorage.getItem('panelbuild-128x64') || 'null');
+    if (saved && saved.on) { Object.assign(state.on, saved.on); state.cfg = CONFIGS[saved.cfg] ? saved.cfg : 'A'; state.ws = !!saved.ws; }
   } catch (e) { /* storage blocked: keep defaults */ }
-  const save = () => { try { localStorage.setItem('panelbuild-64x32', JSON.stringify(state)); } catch (e) {} };
+  const save = () => { try { localStorage.setItem('panelbuild-128x64', JSON.stringify(state)); } catch (e) {} };
 
   const priceOf = (it, c) => (state.ws && it.ws) ? it.ws[c] : it.price[c];
   const totalFor = (c, byCat) => {
@@ -972,8 +987,8 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
       const [gx, gy] = c.grid;
       let cells = '';
       for (let i = 0; i < gx; i++) for (let j = 0; j < gy; j++) cells += `<rect x="${i * W / gx + 1}" y="${j * H / gy + 1}" width="${W / gx - 2}" height="${H / gy - 2}" rx="1.5" fill="var(--s1)" opacity=".75"/>`;
-      return `<article class="card cfg${k === 'B' ? ' rec' : ''}">
-        ${k === 'B' ? '<span class="tag">Recommandé</span>' : ''}
+      return `<article class="card cfg${k === 'A' ? ' rec' : ''}">
+        ${k === 'A' ? '<span class="tag">Recommandé</span>' : ''}
         <div><p class="eyebrow">Config. ${k}</p><h3>${c.name} · ${c.res}</h3></div>
         <div class="shape" aria-hidden="true"><svg width="${W + 2}" height="${H + 2}" viewBox="0 0 ${W + 2} ${H + 2}">${cells}</svg></div>
         <dl><dt>Panneaux</dt><dd>${c.panels}</dd><dt>Taille</dt><dd>${c.mm}</dd><dt>Pixels</dt><dd>${nf(c.px)} (×${c.px / 256})</dd><dt>Courant max.</dt><dd>${c.ampMax} A sous 5 V</dd><dt>Alimentation</dt><dd>${c.psu[0]} (${c.psu[1]} A)</dd></dl>
@@ -988,17 +1003,17 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
     const svg = $('#chartPixels');
     const rows = [
       { l: 'Actuel 8×32', v: 256, d: 'WS2812 · 320×80 mm · 1 LED/cm²' },
-      { l: 'A · 128×32', v: 4096, d: 'Bandeau · 320×80 mm · 16 LED/cm²' },
-      { l: 'B · 128×64', v: 8192, d: 'Écran 2×2 · 320×160 mm · 16 LED/cm²' },
-      { l: 'C · 128×64 P4', v: 8192, d: 'Grand format · 512×256 mm · 6,25 LED/cm²' }
+      { l: 'A · 128×64', v: 8192, d: 'Panneau unique · 320×160 mm · 16 LED/cm²' },
+      { l: 'B · 128×128', v: 16384, d: 'Carré · 320×320 mm · 16 LED/cm²' },
+      { l: 'C · 256×64', v: 16384, d: 'Bandeau · 640×160 mm · 16 LED/cm²' }
     ];
     const W = Math.max(300, Math.round(svg.getBoundingClientRect().width) || 560);
     const narrow = W < 420;
-    const x0 = narrow ? 112 : 168, x1 = W - 58, max = 8192, top = 14, rh = 40, bh = 20;
+    const x0 = narrow ? 112 : 168, x1 = W - 58, max = 16384, top = 14, rh = 40, bh = 20;
     svg.setAttribute('viewBox', `0 0 ${W} 200`);
     const sx = v => x0 + (x1 - x0) * v / max;
     let s = '';
-    (narrow ? [0, 4096, 8192] : [0, 2048, 4096, 6144, 8192]).forEach(t => {
+    (narrow ? [0, 8192, 16384] : [0, 4096, 8192, 12288, 16384]).forEach(t => {
       s += `<line class="grid" x1="${sx(t)}" x2="${sx(t)}" y1="${top - 4}" y2="${top + rows.length * rh}"/>`;
       s += `<text x="${sx(t)}" y="${top + rows.length * rh + 16}" text-anchor="middle">${t ? nf(t) : 0}</text>`;
     });
@@ -1084,7 +1099,7 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
   }
 
   /* ---------- Power chart ---------- */
-  let pwrCfg = 'B';
+  let pwrCfg = 'A';
   function renderPower() {
     const svg = $('#chartPower');
     const c = CONFIGS[pwrCfg];
@@ -1135,13 +1150,13 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
   /* ---------- Static tables ---------- */
   const PINS = [
     ['R1', 1, 1, 4], ['G1', 2, 5, 5], ['B1', 3, 6, 6], ['R2', 5, 7, 7], ['G2', 6, 13, 15], ['B2', 7, 9, 16],
-    ['E', 8, '–', '–'], ['A', 9, 16, 18], ['B', 10, 48, 8], ['C', 11, 47, 3], ['D', 12, 21, 42],
+    ['E', 8, 38, 9], ['A', 9, 16, 18], ['B', 10, 48, 8], ['C', 11, 47, 3], ['D', 12, 21, 42],
     ['CLK', 13, 18, 41], ['LAT', 14, 8, 40], ['OE', 15, 4, 2], ['GND', '4, 16', 'GND', 'GND']
   ];
   $('#pinTable').innerHTML = PINS.map(p => `<tr><td class="mono"><b>${p[0]}</b></td><td class="r">${p[1]}</td><td class="r">${p[2]}</td><td class="r">${p[3]}</td></tr>`).join('')
-    + `<tr><td colspan="4" class="caption">E : inutile sur un 64×32 en scan 1/16. Micro INMP441 (firmware WLED) : SD → 10, SCK → 11, WS → 12, L/R → GND.</td></tr>`;
-  const HUB = [[1, 'R1'], [2, 'G1'], [3, 'B1'], [4, 'GND'], [5, 'R2'], [6, 'G2'], [7, 'B2'], [8, 'E · inutile'], [9, 'A'], [10, 'B'], [11, 'C'], [12, 'D'], [13, 'CLK'], [14, 'LAT'], [15, 'OE'], [16, 'GND']];
-  $('#hub').innerHTML = HUB.map(([n, s]) => `<div class="${s === 'GND' ? 'g' : ''}${s.startsWith('E') ? ' g' : ''}"><i>${n}</i>${s}</div>`).join('');
+    + `<tr><td colspan="4" class="caption">Micro INMP441 (firmware WLED) : SD → 10, SCK → 11, WS → 12, L/R → GND.</td></tr>`;
+  const HUB = [[1, 'R1'], [2, 'G1'], [3, 'B1'], [4, 'GND'], [5, 'R2'], [6, 'G2'], [7, 'B2'], [8, 'E'], [9, 'A'], [10, 'B'], [11, 'C'], [12, 'D'], [13, 'CLK'], [14, 'LAT'], [15, 'OE'], [16, 'GND']];
+  $('#hub').innerHTML = HUB.map(([n, s]) => `<div class="${s === 'GND' ? 'g' : ''}${s === 'E' ? ' e' : ''}"><i>${n}</i>${s}</div>`).join('');
 
   const REFRESH = [['8 bits, exact', 18, 28], ['8 bits, réduit auto.', 106, 170], ['6 bits', 116, 186], ['5 bits', 122, 196]];
   $('#refreshTable').innerHTML = REFRESH.map(r => `<tr><td>${r[0]}</td>${[r[1], r[2]].map(v => `<td class="r"><span class="pill ${v >= 60 ? 'good' : v >= 50 ? 'warn' : 'bad'}">${v} Hz</span></td>`).join('')}</tr>`).join('');
@@ -1149,7 +1164,7 @@ VirtualMatrixPanel_T&lt;CHAIN_TOP_RIGHT_DOWN&gt; *ecran;   <span class="c">// 12
   /* ---------- Wiring it together ---------- */
   function refresh() {
     renderBom(); renderCards(); renderCost();
-    $('#heroTotal').textContent = '≈ ' + eur(Math.round(totalFor('B').total / 5) * 5);
+    $('#heroTotal').textContent = '≈ ' + eur(Math.round(totalFor('A').total / 5) * 5);
     renderSeg($('#cfgSeg'), k => { state.cfg = k; save(); refresh(); });
   }
   $('#waveshare').addEventListener('change', e => { state.ws = e.target.checked; save(); refresh(); });
